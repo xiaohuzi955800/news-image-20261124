@@ -12,7 +12,7 @@ A program that draws one image summing up the world news of Tuesday 24 November 
 python3 main.py
 ```
 
-This writes `entry.png` next to `main.py`: a 1024x1024 newspaper-style front page with 32 stories from 24 November 2026 — a UTC timeline, a THE DAY IN NUMBERS strip, 3 headline stories with illustrated scene panels, 12 secondary stories with illustrated panels, a 17-brief list with a world map, and a DATE CHECK box naming 22–23 November stories deliberately left out. Standard library only, no network; two runs produce identical bytes.
+This writes `entry.png` next to `main.py`: a 1024x1024 newspaper-style front page with 39 stories from 24 November 2026 across 8 regions — a UTC timeline, a THE DAY IN NUMBERS strip, 3 headline stories with illustrated scene panels, 12 secondary stories with illustrated panels, a 24-brief list with a world map, and a DATE CHECK box naming 22–23 November stories deliberately left out. Standard library only, no network; two runs produce identical bytes.
 
 ## Type
 

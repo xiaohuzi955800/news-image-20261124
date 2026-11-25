@@ -1,19 +1,19 @@
-# Version A — balanced (3 leads + 12 pictures + 17 briefs = 32 items).
+# Version B — high density (3 leads + 12 pictures + 24 briefs = 39 items).
+# Same headlines and secondary stories as A; secondary summaries cut to
+# one line each and headline art slightly shorter to fit 24 briefs.
 # All facts from news-research.md (24 Nov 2026, verified 25 Nov).
-# Regions: Americas, Europe, Africa, Asia, Middle East, Latin America.
-# No Oceania item could be verified for 24 Nov, so none is invented.
 
 GEOM = {
     "headline_col_w": 322,
     "headline_gap": 13,
-    "headline_art_h": 84,
+    "headline_art_h": 78,
     "secondary_cell_w": 240,
     "secondary_gap": 10,
-    "secondary_row_h": 113,
+    "secondary_row_h": 101,
     "secondary_art_h": 46,
     "secondary_cols": 4,
     "secondary_rows": 3,
-    "map_w": 300,
+    "map_w": 250,
     "map_h": 120,
     "brief_cols": 2,
 }
@@ -21,7 +21,7 @@ GEOM = {
 DATA = {
     "date_title": "Tuesday 24 November 2026",
     "red_line": "Huawei convicted · Dow tops 50,000 · Gaza strike kills Hamas security chief",
-    "overview": "32 STORIES · 6 REGIONS · 15 FIELDS · 3 LEADS · 12 PICTURES · 17 BRIEFS",
+    "overview": "39 STORIES · 8 REGIONS · 16 FIELDS · 3 LEADS · 12 PICTURES · 24 BRIEFS",
 
     "headlines": [
         {
@@ -30,7 +30,7 @@ DATA = {
             "summary": "Brooklyn jury finds bank fraud, sanctions breaches and trade-secret theft; cleared on racketeering.",
             "place": "NEW YORK · JUSTICE", "cred": "CONFIRMED · REUTERS",
             "geotag": "NEW YORK", "geotag_pos": "br",
-            "region": "Americas", "field": "Justice",
+            "region": "North America", "field": "Justice",
         },
         {
             "scene": "chart", "banner": "DOW 50,000",
@@ -38,7 +38,7 @@ DATA = {
             "summary": "Dow +0.85% to 50,018.70 as money rotates out of tech; Nasdaq -1.48%. Nvidia -5.86%.",
             "place": "NEW YORK · MARKETS", "cred": "CONFIRMED · AP",
             "geotag": "NEW YORK", "geotag_pos": "tr",
-            "region": "Americas", "field": "Markets",
+            "region": "North America", "field": "Markets",
         },
         {
             "scene": "flame", "banner": "CEASEFIRE UNDER STRAIN",
@@ -52,86 +52,86 @@ DATA = {
 
     "secondary": [
         {
-            "scene": "tanker", "banner": "OIL WAR",
+            "scene": "refinery", "banner": "OIL WAR",
             "title": "Putin vows retaliation for refinery strikes",
-            "summary": "Says Ukraine keeps hitting Russian refineries despite Trump's request to stop.",
+            "summary": "Vows payback for strikes on Russian refineries.",
             "data": "REFINING HIT", "cred": "CONFIRMED · REUTERS",
             "region": "Europe", "field": "War",
         },
         {
-            "scene": "building", "banner": "NIGHT STRIKE",
+            "scene": "strike", "banner": "NIGHT STRIKE",
             "title": "Russian strike on Zaporizhzhia kills 2, wounds 40",
-            "summary": "Overnight attack hits an apartment block; four children among the wounded.",
+            "summary": "Overnight hit on flats; four children wounded.",
             "data": "2 DEAD · 40 HURT", "cred": "CONFIRMED · AP",
             "region": "Europe", "field": "War",
         },
         {
-            "scene": "plane", "banner": "JETS SCRAMBLED",
+            "scene": "jets", "banner": "JETS SCRAMBLED",
             "title": "Russian jets enter Korea's air defence zone",
-            "summary": "Seoul scrambles fighters; rare air-raid alert on Ulleung Island. No airspace violated.",
+            "summary": "Seoul scrambles jets; rare Ulleung Island alert.",
             "data": "ULLEUNG ALERT", "cred": "CONFIRMED · AL JAZEERA",
-            "region": "Asia", "field": "Military",
+            "region": "East Asia", "field": "Military",
         },
         {
-            "scene": "summit", "banner": "GRAFT PROBE",
+            "scene": "court", "banner": "GRAFT PROBE",
             "title": "China investigates Shanghai party chief Chen Jining",
-            "summary": "Politburo member probed for suspected severe violations; fourth since 2025.",
+            "summary": "Politburo member probed; fourth since 2025.",
             "data": "4TH SINCE 2025", "cred": "CONFIRMED · REUTERS",
-            "region": "Asia", "field": "Politics",
+            "region": "East Asia", "field": "Politics",
         },
         {
-            "scene": "building", "banner": "$237.5B DEBT",
+            "scene": "debt", "banner": "$237.5B DEBT",
             "title": "Venezuela reveals $237.5bn debt mountain",
-            "summary": "First full tally: 242% of GDP, groundwork for a giant sovereign restructuring.",
+            "summary": "First tally: 242% of GDP; giant restructuring.",
             "data": "242% OF GDP", "cred": "CONFIRMED · REUTERS",
             "region": "Latin America", "field": "Economy",
         },
         {
-            "scene": "ship", "banner": "FUEL BLOCKADE",
+            "scene": "fuel", "banner": "FUEL BLOCKADE",
             "title": "WHO chief urges US to lift Cuba fuel blockade",
-            "summary": "Tedros warns children's lives at risk; WHO pledges $2m for vaccines and gear.",
+            "summary": "WHO pledges $2m; children's lives at risk.",
             "data": "$2M PLEDGED", "cred": "CONFIRMED · REUTERS",
             "region": "Latin America", "field": "Health",
         },
         {
-            "scene": "forest", "banner": "EBOLA DISRUPTED",
+            "scene": "clinic", "banner": "EBOLA DISRUPTED",
             "title": "Fighting traps Ebola teams in DR Congo",
-            "summary": "Clashes near Ituri hospital force response teams to take cover for over 24 hours.",
+            "summary": "Clashes near Ituri hospital; teams shelter 24h+.",
             "data": "24H+ SHELTER", "cred": "CONFIRMED · UN",
             "region": "Africa", "field": "Health",
         },
         {
             "scene": "chip", "banner": "AI SELL-OFF",
             "title": "Nvidia slides 5.86%; Anthropic below IPO price",
-            "summary": "A day after Huang's return sent shares up 31.5%, Nvidia falls to $155.38.",
+            "summary": "A day after +31.5% surge, Nvidia falls to $155.38.",
             "data": "-5.86% · -6.54%", "cred": "CONFIRMED · INVESTOPEDIA",
-            "region": "Americas", "field": "Markets",
+            "region": "North America", "field": "Markets",
         },
         {
-            "scene": "market", "banner": "CONFIDENCE 103.3",
+            "scene": "shop", "banner": "CONFIDENCE 103.3",
             "title": "US consumer confidence jumps to 103.3",
-            "summary": "Up 11.4 points in November, highest since January 2025, far above forecast.",
+            "summary": "Up 11.4 points; highest since January 2025.",
             "data": "+11.4 PTS", "cred": "CONFIRMED · REUTERS",
-            "region": "Americas", "field": "Economy",
+            "region": "North America", "field": "Economy",
         },
         {
-            "scene": "lab", "banner": "CLAUDE SHIP",
+            "scene": "code", "banner": "CLAUDE SHIP",
             "title": "Anthropic launches Claude Ship code agents",
-            "summary": "Three agents review pull requests, push fixes and approve merges by policy.",
+            "summary": "Three agents review, fix and approve merges.",
             "data": "3 AGENTS", "cred": "CONFIRMED · ANTHROPIC",
-            "region": "Americas", "field": "AI",
+            "region": "North America", "field": "AI",
         },
         {
             "scene": "rocket", "banner": "FIRST FOREIGNER",
             "title": "China names Shenzhou-24 crew; Pakistani to visit Tiangong",
-            "summary": "Muhammad Zeeshan Ali, 40, will be the first foreign astronaut aboard the station.",
+            "summary": "Ali, 40, first foreign astronaut aboard Tiangong.",
             "data": "LAUNCH 25 NOV", "cred": "CONFIRMED · AP",
-            "region": "Asia", "field": "Space",
+            "region": "East Asia", "field": "Space",
         },
         {
             "scene": "trophy", "banner": "TITLE RESTORED",
             "title": "CAS hands Senegal back the Africa Cup title",
-            "summary": "Court overturns CAF's decision to strip the crown after the walk-off final.",
+            "summary": "Court overturns CAF's decision to strip crown.",
             "data": "1-0 AET", "cred": "CONFIRMED · AP",
             "region": "Africa", "field": "Sport",
         },
@@ -140,22 +140,29 @@ DATA = {
     # (num, place, phrase, region, field)
     "briefs": [
         (16, "ODESA", "Russian strike kills 2, injures 3; drones hit Kyiv", "Europe", "War"),
-        (17, "MOSCOW", "Mediazona puts Russian war dead near 700,000", "Europe", "War"),
-        (18, "BERLIN", "Germany first to use Ukraine's Delta battlefield system", "Europe", "Military"),
+        (17, "MOSCOW", "Mediazona estimates Russian war dead near 700,000", "Europe", "War"),
+        (18, "BERLIN", "Germany first to access Ukraine Delta system, Kyiv says", "Europe", "Military"),
         (19, "KYIV", "Zelenskyy says Ukraine needs $125bn in 2027", "Europe", "War"),
-        (20, "WASHINGTON", "US debating strikes on Iran leaders, NBC reports", "Middle East", "War"),
-        (21, "GAZA", "Board of Peace: Hamas agrees disarmament roadmap", "Middle East", "Diplomacy"),
+        (20, "WASHINGTON", "US debating strikes on Iran's leaders, NBC reports", "Middle East", "War"),
+        (21, "GAZA", "Board of Peace says Hamas agrees disarmament roadmap", "Middle East", "Diplomacy"),
         (22, "BAGHDAD", "PM orders state takeover of Kurdish-area oilfields", "Middle East", "Energy"),
-        (23, "BRUSSELS", "NATO vows to defend space after Russia report", "Europe", "Military"),
+        (23, "BRUSSELS", "NATO vows to defend space after Russia satellite report", "Europe", "Military"),
         (24, "JERUSALEM", "US envoy doubts end to $3.8bn yearly Israel aid", "Middle East", "Diplomacy"),
-        (25, "BUDAPEST", "Hungary opposes EUR 1.78tn EU budget plan", "Europe", "EU"),
+        (25, "BUDAPEST", "Hungary opposes EUR 1.78tn EU budget, reports say", "Europe", "EU"),
         (26, "GENEVA", "Gavi plans up to 1.5m Ebola vaccine doses", "Africa", "Health"),
-        (27, "WORLD", "Year's biggest supermoon, the beaver moon, lights sky", "Americas", "Science"),
+        (27, "KINSHASA", "DR Congo orders foreign miners to open units to locals", "Africa", "Mining"),
         (28, "MADRID", "Real Madrid thrash PSV 5-1; Man City draw 2-2 Napoli", "Europe", "Sport"),
-        (29, "GENEVA", "Gukesh, Sindarov draw game 1 of chess title match", "Europe", "Sport"),
-        (30, "LONDON", "DeepMind: Gemini 4 agents cut quantum costs 290x", "Europe", "AI"),
-        (31, "TEL AVIV", "Check Point servers breached in 16 countries, 24 hit", "Middle East", "Security"),
-        (32, "NEW YORK", "Gold -2.70% to $3,552.80; WTI +1.82% to $81.63", "Americas", "Markets"),
+        (29, "GENEVA", "Gukesh and Sindarov draw game 1 of chess title match", "Europe", "Sport"),
+        (30, "DHAKA", "Hasina plans Dec 16 return; 101 platoons deployed", "South Asia", "Politics"),
+        (31, "TEL AVIV", "Researchers: 24 Check Point servers hit in 16 nations", "Middle East", "Security"),
+        (32, "NEW YORK", "Gold -2.70% to $3,552.80; WTI oil +1.82% to $81.63", "North America", "Markets"),
+        (33, "BERLIN", "German Ifo business climate rises to 90.6", "Europe", "Economy"),
+        (34, "SAN FRANCISCO", "Claude 'proved VP-VNP', Anthropic says", "North America", "AI"),
+        (35, "BRASILIA", "Lula signs fiscal law capping spending growth at 2%", "Latin America", "Economy"),
+        (36, "LONDON", "Meta's Muse agent launches in the UK", "Europe", "AI"),
+        (37, "BHOPAL", "India women beat China 6-2 in hockey", "South Asia", "Sport"),
+        (38, "INDIA", "Teen Sooryavanshi smashes 204 off 53 balls", "South Asia", "Sport"),
+        (39, "HANOI", "Reports: restaurant blast kills at least 6, injures 10", "Southeast Asia", "Accident"),
     ],
 
     "numbers": [
@@ -167,12 +174,10 @@ DATA = {
         ("272", "MENINGITIS CASES"),
     ],
 
-    # Counted from the items above; sums to 32 (all items).  The supermoon
-    # brief is worldwide; it is counted under Americas only so the bar
-    # still adds up — no region is invented for it.
     "region_counts": {
-        "Americas": 7, "Europe": 11, "Africa": 3, "Asia": 3,
-        "Middle East": 6, "Latin America": 2,
+        "North America": 7, "Europe": 12, "Africa": 4, "East Asia": 3,
+        "Middle East": 6, "Latin America": 3, "South Asia": 3,
+        "Southeast Asia": 1,
     },
 
     "timeline": [
@@ -185,19 +190,18 @@ DATA = {
         ("21:00", "Dow tops 50,000"),
     ],
 
-    # (lon, lat, story number, region colour)
     "map_dots": [
         (-74.0, 40.7, 1, (30, 90, 160)),
         (34.5, 31.5, 3, (120, 60, 160)),
         (37.6, 55.8, 4, (200, 120, 20)),
-        (35.2, 47.8, 5, (200, 120, 20)),
-        (127.0, 37.5, 6, (30, 140, 90)),
         (121.5, 31.2, 7, (30, 140, 90)),
         (-66.9, 10.5, 8, (200, 60, 60)),
         (-82.4, 23.1, 9, (200, 60, 60)),
-        (29.5, 1.5, 10, (160, 40, 90)),
         (98.5, 39.7, 14, (30, 140, 90)),
         (-17.4, 14.7, 15, (160, 40, 90)),
+        (15.3, -4.3, 27, (160, 40, 90)),
+        (90.4, 23.8, 30, (200, 80, 160)),
+        (-47.9, -15.8, 35, (200, 60, 60)),
     ],
 
     "date_check": {

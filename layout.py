@@ -20,16 +20,18 @@ PAPER = (255, 255, 255)
 CREAM = (250, 247, 240)
 
 REGION_COLORS = {
-    "Americas": (30, 90, 160),
+    "North America": (30, 90, 160),
     "Europe": (200, 120, 20),
     "Africa": (160, 40, 90),
-    "Asia": (30, 140, 90),
+    "East Asia": (30, 140, 90),
     "Middle East": (120, 60, 160),
     "Latin America": (200, 60, 60),
-    "Oceania": (20, 140, 180),
+    "South Asia": (200, 80, 160),
+    "Southeast Asia": (20, 140, 180),
 }
-REGION_ORDER = ["Americas", "Europe", "Africa", "Asia", "Middle East",
-                "Latin America", "Oceania"]
+REGION_ORDER = ["North America", "Europe", "Africa", "East Asia",
+                "Middle East", "Latin America", "South Asia",
+                "Southeast Asia"]
 
 
 # ---------------------------------------------------------------- scenes
@@ -157,7 +159,7 @@ def _chart(c, x, y, w, h):
     for i in range(len(pts2) - 1):
         c.line(pts2[i][0], pts2[i][1], pts2[i + 1][0], pts2[i + 1][1],
                (70, 200, 110), 2)
-    c.draw_text(x + int(0.06 * w), y + int(0.14 * h), "sans_bold_14", "+4.7%",
+    c.draw_text(x + int(0.06 * w), y + int(0.14 * h), "sans_bold_14", "50,018",
                 (90, 220, 130))
 
 
@@ -579,6 +581,240 @@ def _trophy(c, x, y, w, h):
         c.line(px, py - 5, px, py + 5, (255, 255, 255), 1)
 
 
+def _jets(c, x, y, w, h):
+    """Fighter jets scrambling: sky, clouds, island, two jets, contrails."""
+    c.fill_rect(x, y, w, h, (150, 190, 230))
+    for (fx, fy) in [(0.10, 0.16), (0.68, 0.10)]:
+        c.circle(x + int(fx * w), y + int(fy * h), 9, (240, 244, 248))
+        c.circle(x + int(fx * w) + 11, y + int(fy * h) + 2, 6,
+                 (240, 244, 248))
+    # island (Ulleung) with alert tower
+    c.poly([(x, y + h), (x + int(0.18 * w), y + int(0.72 * h)),
+            (x + int(0.38 * w), y + h)], (70, 110, 70))
+    c.fill_rect(x + int(0.24 * w), y + int(0.58 * h), 4, int(0.14 * h),
+                (60, 60, 60))
+    c.circle(x + int(0.24 * w) + 2, y + int(0.54 * h), 5, (220, 40, 40))
+    # sea
+    c.fill_rect(x, y + int(0.82 * h), w, h - int(0.82 * h), (40, 90, 140))
+    # two jets with contrails
+    for (jx, jy, s) in [(0.45, 0.35, 1.0), (0.62, 0.55, 0.8)]:
+        px, py = x + int(jx * w), y + int(jy * h)
+        sc = int(16 * s)
+        c.poly([(px - sc, py), (px + sc, py - 4), (px + sc + 6, py),
+                (px + sc, py + 4)], (70, 80, 100))
+        c.poly([(px - 2, py - 3), (px + 4, py - sc), (px + 8, py - 3)],
+               (55, 65, 85))
+        c.poly([(px - 2, py + 3), (px + 4, py + sc), (px + 8, py + 3)],
+               (55, 65, 85))
+        for k in range(4):
+            c.line(px - sc - k * 9, py, px - sc - k * 9 - 5, py,
+                   (255, 255, 255), 1)
+
+
+def _strike(c, x, y, w, h):
+    """Apartment block hit at night: tower, lit/broken windows, smoke,
+    flame, rubble."""
+    c.fill_rect(x, y, w, h, (60, 55, 70))
+    c.circle(x + int(0.85 * w), y + int(0.16 * h), 9, (220, 200, 160))
+    bx = x + int(0.30 * w)
+    by = y + int(0.18 * h)
+    bw, bh = int(0.40 * w), int(0.62 * h)
+    c.fill_rect(bx, by, bw, bh, (40, 40, 52))
+    for r in range(4):
+        for ci in range(4):
+            wx = bx + 6 + ci * (bw // 4)
+            wy = by + 5 + r * (bh // 4)
+            col = (255, 210, 110) if (r + ci) % 3 else (20, 20, 26)
+            c.fill_rect(wx, wy, 7, 6, col)
+    # broken corner + smoke
+    c.poly([(bx + bw, by), (bx + bw, by + 16), (bx + bw - 18, by + 8)],
+           (25, 25, 30))
+    for (fx, fy, r) in [(0.72, 0.22, 9), (0.78, 0.12, 7), (0.66, 0.10, 6)]:
+        c.circle(x + int(fx * w), y + int(fy * h), r, (120, 120, 125))
+    # flame at the base + rubble
+    fx, fy = bx + bw // 2, y + int(0.82 * h)
+    c.poly([(fx, fy - 16), (fx - 9, fy), (fx - 3, fy - 6), (fx, fy + 1),
+            (fx + 3, fy - 6), (fx + 9, fy)], (255, 120, 30))
+    for (ox, oy) in [(-30, 2), (-16, 5), (14, 4), (28, 1)]:
+        c.poly([(fx + ox, fy + 6), (fx + ox + 10, fy + 6),
+                (fx + ox + 5, fy - 2)], (90, 85, 80))
+
+
+def _debt(c, x, y, w, h):
+    """Debt mountain: bank facade, coin stacks, red down arrow."""
+    c.fill_rect(x, y, w, h, (200, 210, 225))
+    c.poly([(x + int(0.12 * w), y + int(0.28 * h)),
+            (x + int(0.50 * w), y + int(0.08 * h)),
+            (x + int(0.88 * w), y + int(0.28 * h))], (150, 140, 120))
+    for i in range(4):
+        cx = x + int((0.18 + i * 0.20) * w)
+        c.fill_rect(cx, y + int(0.30 * h), 10, int(0.44 * h),
+                    (235, 232, 222))
+        c.fill_rect(cx - 2, y + int(0.28 * h), 14, 4, (210, 206, 194))
+    c.fill_rect(x, y + int(0.76 * h), w, 4, (150, 140, 120))
+    # coin stacks
+    for (fx, fh) in [(0.10, 3), (0.82, 4)]:
+        px = x + int(fx * w)
+        for k in range(fh):
+            c.circle(px, y + h - 6 - k * 5, 6, (220, 175, 50))
+            c.circle(px, y + h - 6 - k * 5, 6, (180, 140, 30), fill=False)
+    # red down arrow
+    ax = x + int(0.68 * w)
+    c.poly([(ax, y + int(0.42 * h)), (ax + 8, y + int(0.42 * h)),
+            (ax + 8, y + int(0.62 * h)), (ax + 14, y + int(0.62 * h)),
+            (ax + 4, y + int(0.78 * h)), (ax - 6, y + int(0.62 * h)),
+            (ax, y + int(0.62 * h))], (200, 40, 40))
+
+
+def _refinery(c, x, y, w, h):
+    """Oil refinery: towers, pipes, storage spheres, flare flame, smoke."""
+    c.fill_rect(x, y, w, h, (170, 190, 215))
+    c.circle(x + int(0.82 * w), y + int(0.14 * h), 10, (255, 240, 170))
+    # distillation towers
+    for (fx, fw, fh) in [(0.12, 0.10, 0.55), (0.30, 0.13, 0.68),
+                         (0.52, 0.09, 0.48)]:
+        tx = x + int(fx * w)
+        ty = y + int((0.88 - fh) * h)
+        c.fill_rect(tx, ty, int(fw * w), int(fh * h), (150, 155, 165))
+        for k in range(3):
+            c.fill_rect(tx, ty + 6 + k * (int(fh * h) // 3),
+                        int(fw * w), 2, (110, 115, 125))
+    # horizontal pipes
+    for fy in (0.55, 0.68):
+        c.fill_rect(x + int(0.10 * w), y + int(fy * h), int(0.62 * w), 4,
+                    (90, 95, 105))
+    # storage spheres
+    for (fx, r) in [(0.72, 12), (0.88, 10)]:
+        c.circle(x + int(fx * w), y + int(0.74 * h), r, (210, 210, 215))
+        c.line(x + int(fx * w) - r, y + int(0.74 * h),
+               x + int(fx * w) + r, y + int(0.74 * h), (150, 150, 155), 1)
+    # flare stack flame + smoke
+    fx = x + int(0.45 * w)
+    c.fill_rect(fx, y + int(0.20 * h), 5, int(0.50 * h), (70, 75, 85))
+    c.poly([(fx + 2, y + int(0.20 * h) - 12), (fx - 5, y + int(0.20 * h)),
+            (fx + 9, y + int(0.20 * h))], (255, 160, 40))
+    c.circle(fx + 8, y + int(0.10 * h), 6, (180, 180, 180))
+    c.circle(fx + 16, y + int(0.06 * h), 4, (200, 200, 200))
+    c.fill_rect(x, y + int(0.88 * h), w, 4, (100, 100, 100))
+
+
+def _fuel(c, x, y, w, h):
+    """Fuel depot: storage tanks, pipes, barrels, fence."""
+    c.fill_rect(x, y, w, h, (215, 225, 235))
+    for (fx, fw, col) in [(0.08, 0.22, (230, 230, 235)),
+                          (0.36, 0.22, (200, 210, 220)),
+                          (0.64, 0.22, (230, 230, 235))]:
+        tx = x + int(fx * w)
+        ty = y + int(0.30 * h)
+        tw = int(fw * w)
+        c.fill_rect(tx, ty, tw, int(0.42 * h), col)
+        c.rect(tx, ty, tw, int(0.42 * h), (120, 125, 135), 1)
+        c.fill_rect(tx, ty, tw, 5, (200, 60, 50))
+        c.line(tx + tw // 2, ty, tx + tw // 2, ty + int(0.42 * h),
+               (160, 165, 175), 1)
+    c.fill_rect(x + int(0.08 * w), y + int(0.72 * h), int(0.78 * w), 4,
+                (90, 95, 105))
+    # barrels in front
+    for (fx, col) in [(0.14, (60, 110, 200)), (0.24, (200, 60, 50)),
+                      (0.84, (60, 140, 80))]:
+        bx = x + int(fx * w)
+        c.fill_rect(bx, y + int(0.78 * h), 12, 12, col)
+        c.fill_rect(bx, y + int(0.78 * h) + 3, 12, 2, (255, 255, 255))
+    for i in range(6):
+        fx = x + int((0.05 + i * 0.18) * w)
+        c.vline(fx, y + int(0.14 * h), int(0.10 * h), (120, 120, 120), 1)
+
+
+def _clinic(c, x, y, w, h):
+    """Field clinic tent: red cross, beds, IV stand, medic."""
+    c.fill_rect(x, y, w, h, (190, 215, 200))
+    c.fill_rect(x, y + int(0.78 * h), w, h - int(0.78 * h), (140, 170, 120))
+    # tent
+    tx = x + int(0.30 * w)
+    c.poly([(tx, y + int(0.12 * h)), (tx + int(0.40 * w), y + int(0.12 * h)),
+            (tx + int(0.40 * w), y + int(0.78 * h)),
+            (tx, y + int(0.78 * h))], (245, 245, 240))
+    c.poly([(tx - 8, y + int(0.78 * h)), (tx + int(0.20 * w),
+            y + int(0.02 * h)), (tx + int(0.40 * w) + 8, y + int(0.78 * h))],
+           (225, 225, 218))
+    cx, cy = tx + int(0.20 * w), y + int(0.34 * h)
+    c.fill_rect(cx - 9, cy - 3, 18, 6, (200, 40, 40))
+    c.fill_rect(cx - 3, cy - 9, 6, 18, (200, 40, 40))
+    # bed + IV stand
+    bx = x + int(0.72 * w)
+    c.fill_rect(bx, y + int(0.62 * h), 26, 5, (120, 130, 140))
+    c.fill_rect(bx + 2, y + int(0.67 * h), 3, 8, (80, 85, 95))
+    c.fill_rect(bx + 21, y + int(0.67 * h), 3, 8, (80, 85, 95))
+    c.circle(bx + 6, y + int(0.58 * h), 4, (230, 200, 170))
+    c.line(bx + 30, y + int(0.40 * h), bx + 30, y + int(0.72 * h),
+           (60, 60, 60), 1)
+    c.fill_rect(bx + 26, y + int(0.40 * h), 8, 10, (200, 220, 235))
+    # medic figure
+    mx = x + int(0.12 * w)
+    c.circle(mx, y + int(0.52 * h), 6, (230, 200, 170))
+    c.fill_rect(mx - 6, y + int(0.58 * h), 12, 18, (255, 255, 255))
+    c.fill_rect(mx - 6, y + int(0.58 * h), 12, 4, (200, 40, 40))
+
+
+def _shop(c, x, y, w, h):
+    """High street: storefront, awning, bags, rising arrow."""
+    c.fill_rect(x, y, w, h, (200, 215, 235))
+    for i in range(5):
+        col = (60, 140, 90) if i % 2 == 0 else (245, 245, 245)
+        c.fill_rect(x + i * (w // 5), y, w // 5, int(0.20 * h), col)
+    c.fill_rect(x, y + int(0.20 * h), w, 4, (90, 60, 40))
+    # window with goods + door
+    c.fill_rect(x + int(0.10 * w), y + int(0.30 * h), int(0.44 * w),
+                int(0.34 * h), (180, 220, 235))
+    c.rect(x + int(0.10 * w), y + int(0.30 * h), int(0.44 * w),
+           int(0.34 * h), (90, 60, 40), 1)
+    for (fx, col) in [(0.18, (220, 60, 60)), (0.30, (60, 120, 200)),
+                      (0.42, (240, 180, 40))]:
+        c.circle(x + int(fx * w), y + int(0.47 * h), 7, col)
+    c.fill_rect(x + int(0.62 * w), y + int(0.30 * h), int(0.22 * w),
+                int(0.44 * h), (120, 80, 50))
+    c.circle(x + int(0.78 * w), y + int(0.52 * h), 2, (255, 220, 120))
+    # shopping bags + rising arrow
+    for (fx, col) in [(0.16, (200, 60, 60)), (0.30, (60, 110, 200))]:
+        bx = x + int(fx * w)
+        c.poly([(bx, y + int(0.78 * h)), (bx + 16, y + int(0.78 * h)),
+                (bx + 14, y + int(0.94 * h)), (bx + 2, y + int(0.94 * h))],
+               col)
+        c.line(bx + 4, y + int(0.78 * h), bx + 8, y + int(0.72 * h),
+               (40, 40, 40), 1)
+        c.line(bx + 12, y + int(0.78 * h), bx + 8, y + int(0.72 * h),
+               (40, 40, 40), 1)
+    ax = x + int(0.82 * w)
+    c.poly([(ax, y + int(0.70 * h)), (ax + 6, y + int(0.70 * h)),
+            (ax + 6, y + int(0.82 * h)), (ax + 12, y + int(0.82 * h)),
+            (ax + 3, y + int(0.94 * h)), (ax - 6, y + int(0.82 * h)),
+            (ax, y + int(0.82 * h))], (40, 160, 80))
+
+
+def _code(c, x, y, w, h):
+    """Code review terminal: window, code lines, green checks, cursor."""
+    c.fill_rect(x, y, w, h, (35, 40, 55))
+    c.fill_rect(x, y, w, int(0.20 * h), (60, 66, 80))
+    for i, col in enumerate([(220, 80, 80), (240, 200, 80), (90, 200, 120)]):
+        c.circle(x + int((0.08 + i * 0.09) * w), y + int(0.10 * h), 3, col)
+    # code lines
+    for i, (fx, fw, col) in enumerate([(0.08, 0.42, (90, 160, 220)),
+                                       (0.16, 0.55, (220, 220, 220)),
+                                       (0.16, 0.30, (90, 200, 120)),
+                                       (0.08, 0.48, (220, 220, 220))]):
+        ly = y + int((0.30 + i * 0.16) * h)
+        c.fill_rect(x + int(fx * w), ly, int(fw * w), 4, col)
+    # green check circles on the right
+    for i in range(2):
+        cx = x + int(0.86 * w)
+        cy = y + int((0.38 + i * 0.30) * h)
+        c.circle(cx, cy, 7, (70, 200, 110))
+        c.line(cx - 3, cy, cx - 1, cy + 3, (255, 255, 255), 1)
+        c.line(cx - 1, cy + 3, cx + 4, cy - 3, (255, 255, 255), 1)
+    # cursor block
+    c.fill_rect(x + int(0.08 * w), y + int(0.86 * h), 8, 5, (255, 220, 90))
+
+
 def _generic(c, x, y, w, h):
     """Fallback scene: sun, hills, road."""
     c.fill_rect(x, y, w, h, (170, 200, 230))
@@ -598,7 +834,9 @@ SCENES = {
     "satellite": _satellite, "plane": _plane, "vote": _vote,
     "medal": _medal, "solar": _solar, "forest": _forest, "ship": _ship,
     "market": _market, "lab": _lab, "film": _film, "trophy": _trophy,
-    "generic": _generic,
+    "generic": _generic, "jets": _jets, "strike": _strike,
+    "debt": _debt, "refinery": _refinery, "fuel": _fuel,
+    "clinic": _clinic, "shop": _shop, "code": _code,
 }
 
 
@@ -757,13 +995,15 @@ def brief_list(c, x, y, w, items, cols=2, title="THE BRIEFS"):
     rows = (len(items) + cols - 1) // cols
     for idx, item in enumerate(items):
         num, place, phrase = item[0], item[1], item[2]
+        text = "%s — %s" % (place, phrase)
+        if len(item) > 5 and item[5]:
+            text += " · " + item[5]
         col = idx // rows
         row = idx % rows
         lx = x + col * col_w
         ly = y + 20 + row * 14
         c.draw_text(lx, ly + 10, "sans_bold_10", "%d." % num, RED)
-        c.draw_text(lx + 20, ly + 10, "sans_10",
-                    "%s — %s" % (place, phrase), INK)
+        c.draw_text(lx + 20, ly + 10, "sans_10", text, INK)
     return y + 20 + rows * 14
 
 
@@ -777,6 +1017,23 @@ def date_check(c, x, y, w, left_out, not_yet):
     c.draw_wrapped(x, y + 20 + n * 12 + 2, "sans_9", ny, w, 12,
                    (60, 60, 60), max_lines=1)
     return y + 20 + n * 12 + 16
+
+
+def mini_accents(c, x, y, w, items):
+    """Row of small scene chips under the map (at most 4-6, never
+    cluttering the briefs zone). items: list of (story_num, scene)."""
+    gap = 6
+    n = len(items)
+    cw = (w - gap * (n - 1)) // n
+    ch = 30
+    for i, (num, scene) in enumerate(items):
+        cx = x + i * (cw + gap)
+        c.rect(cx, y, cw, ch, INK, 1)
+        draw_scene(c, scene, cx + 1, y + 1, cw - 2, ch - 2)
+        nw = c.text_width("sans_bold_8", str(num)) + 8
+        c.fill_rect(cx + 1, y + 1, nw, 11, (255, 255, 255))
+        c.draw_text(cx + 5, y + 10, "sans_bold_8", str(num), RED)
+    return y + ch
 
 
 def footer(c, y):

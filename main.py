@@ -40,19 +40,22 @@ def build():
     y = L.region_bar(c, 16, y + 6, 992, DATA["region_counts"])
     y += 4
 
-    # ---- 12 secondary items, 4 columns x 3 rows ----
+    # ---- secondary items, GEOM columns x rows ----
     cell_w = GEOM["secondary_cell_w"]
     cell_gap = GEOM["secondary_gap"]
     row_h = GEOM["secondary_row_h"]
     art_h2 = GEOM["secondary_art_h"]
+    ncols = GEOM.get("secondary_cols", 4)
+    nrows = GEOM.get("secondary_rows", 3)
     sy = y + 4
     for i, s in enumerate(DATA["secondary"]):
-        col = i % 4
-        row = i // 4
+        col = i % ncols
+        row = i // ncols
         x = 16 + col * (cell_w + cell_gap)
         yy = sy + row * row_h
-        L.secondary_cell(c, x, yy, cell_w, s, art_h=art_h2)
-    y = sy + 3 * row_h + 2
+        L.secondary_cell(c, x, yy, cell_w, s, art_h=art_h2,
+                         num=len(DATA["headlines"]) + i + 1)
+    y = sy + nrows * row_h + 2
 
     # ---- UTC timeline ----
     y = L.timeline_row(c, 16, y, 992, DATA["timeline"])
@@ -62,6 +65,12 @@ def build():
     c.draw_text(16, y + 11, "sans_bold_11", "WHERE IT HAPPENED · PINS = STORIES",
                 L.INK)
     draw_map(c, 16, y + 20, map_w, GEOM["map_h"], DATA["map_dots"])
+    # 4 small scene accents in the dead space under the map, each
+    # numbered to its brief (27 Kinshasa mining, 30 Dhaka, 35 Brasilia,
+    # 26 Gavi vaccine) — briefs zone itself stays uncluttered.
+    L.mini_accents(c, 16, y + 20 + GEOM["map_h"] + 6, map_w,
+                   [(27, "diamond"), (30, "vote"), (35, "building"),
+                    (26, "lab")])
     bx = 16 + map_w + 16
     bw = 1008 - bx
     y_briefs = L.brief_list(c, bx, y, bw, DATA["briefs"],
